@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Wowza LB">
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
+        <intProp name="ThreadGroup.num_threads">20</intProp>
+        <intProp name="ThreadGroup.ramp_time">80</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <intProp name="LoopController.loops">-1</intProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults">
+          <intProp name="HTTPSampler.connect_timeout">2000</intProp>
+          <intProp name="HTTPSampler.response_timeout">2000</intProp>
+          <stringProp name="HTTPSampler.port">443</stringProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+        </ConfigTestElement>
+        <hashTree/>
+        <com.blazemeter.jmeter.hls.logic.HlsSampler guiclass="com.blazemeter.jmeter.hls.gui.HlsSamplerGui" testclass="com.blazemeter.jmeter.hls.logic.HlsSampler" testname="bzm - Streaming Sampler">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <stringProp name="HLS.URL_DATA">https://6602b72e3ca7c.streamlock.net/redirect/live/myStream?type=m3u8&amp;DVR</stringProp>
+          <boolProp name="HLS.DURATION">true</boolProp>
+          <stringProp name="HLS.SECONDS_DATA">360</stringProp>
+          <stringProp name="HLS.AUDIO_LANGUAGE"></stringProp>
+          <stringProp name="HLS.SUBTITLE_LANGUAGE"></stringProp>
+          <stringProp name="HLS.BANDWIDTH_TYPE">minBandwidth</stringProp>
+          <stringProp name="HLS.RESOLUTION_TYPE">minResolution</stringProp>
+          <boolProp name="HLS.RESUME_DOWNLOAD">false</boolProp>
+          <stringProp name="VIDEO_STREAMING.PROTOCOL">HLS</stringProp>
+        </com.blazemeter.jmeter.hls.logic.HlsSampler>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
