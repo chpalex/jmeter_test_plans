@@ -1,0 +1,38 @@
+docker pull coolmaster121/jmeter_chp:latest
+docker run -it --name jmeter coolmaster121/jmeter_chp
+
+--Edit the test plan--
+nano jmeter_test_plans/TestWowzaLB.jmx
+
+change HLS.URL_DATA to the desired playback url
+change ThreadGroup.num_threads to the desired of connections
+change ThreadGroup.ramp_time to the desired ramp up time (seconds) to get all of the connections active
+
+To save Control+o + Enter
+To exit Control+x
+
+--Start the load test--
+./jmeter -n -t jmeter_test_plans/TestWowzaLB.jmx -l results.csv
+
+--Stop the lodad test--
+Control+c
+
+--Check logs of the test--
+nano results.csv
+
+To exit Control+x
+
+--Copy results out of the container--
+-exit the contair interaction-
+Control+p and Control+q
+-copy the results.csv file to home directory-
+docker cp jmeter:/opt/apache-jmeter-5.6.3/bin/results.csv ~/
+
+--Stop the docker container--
+-when interacting with the container-
+exit
+-when not interacting with the container-
+docker stop jmeter
+
+--Access the docker interaction--
+docker attach jmeter
