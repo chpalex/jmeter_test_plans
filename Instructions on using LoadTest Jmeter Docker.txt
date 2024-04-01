@@ -14,7 +14,7 @@ To exit Control+x
 --Start the load test--
 ./jmeter -n -t jmeter_test_plans/TestWowzaLB.jmx -l results.csv
 
---Stop the lodad test--
+--Stop the load test--
 Control+c
 
 --Check logs of the test--
